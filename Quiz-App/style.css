@@ -1,0 +1,62 @@
+.btn_start,
+.quiz-box{
+    position: absolute;   /* Buradaki ilk dört satır ile ekranda Star Quiz butonunu ortaladım */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.quiz-box.active{
+    opacity: 1; 
+    pointer-events: auto;
+    transform: translate(-50%,-50%) scale(1); /* card 'ın büyüklüğü 1 olur  */
+}
+
+.quiz-box{
+    width: 550px;
+    transform: translate(-50%,-50%) scale(0.7); /* card 'ın büyüklüğü 0.7 den ve ekranın tam ortasında başlar */
+    transition: all 0.3s ease; /* card içerisinde tüm elemanları kapsayan bir süre olacak. */
+    opacity: 0; /* start butonu altta kaldı, butona tıklayınca bu özelliğin değerini değiştiricem */
+    pointer-events: none; /* buton üzerine gelen option'a ait click eventi çalışmasın diye yaptık. Önemli. */
+}
+
+.quiz-box header .title{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.quiz-box .question_text{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.quiz-box .option_list{
+    padding: 18px 0;  /* alttan ve üstten 18px, sağdan ve soldan 0px boşluk bırakıldı.*/
+}
+
+.quiz-box .option_list .option{
+    border: 1px solid #151D3B; /* her bir text' i 1px lik çizgiler ile çerçeveledim. */
+    border-radius: 5px; /* çerçevelerin kenarlarını yuvarlaklaştırdım*/
+    padding: 8px 15px; /* textler için alttan ve üstten 8px, sağdan ve soldan 15px boşluk bırakıldı. */
+    font-size:16px;
+    margin-bottom: 10px; /* her text için alttan 10px lik boşluk bırakıldı. */
+    cursor: pointer; /* imleç text'in üzerinde geldiğinde şekil değiştirmesi için. */
+    display: flex; /* .option tagı içerisindeki elemanları yan yana getirdi. */
+    align-items: center; /* .option tagı içerisindeki elemanları ortaladı. */
+    justify-content: space-between; /* .option tagı içerisindeki elemanların birini sağ birini sola ayırdı. */
+}
+
+.quiz-box .option_list .option:hover{ /* cursor' ım soruların üzerine gelidiğinde sorulara ait text ve çerçevelerin renklerini ayarladım. */
+    color: #112B2C;
+    background-color: #FFD33D;
+}
+
+.quiz-box .option_list .option.correct{
+    color: #155724;
+    background-color: #d4edda;
+}
+
+.quiz-box .option_list .option.incorrect{
+    color: #721c24;
+    background-color: #f8d7da;
+}
