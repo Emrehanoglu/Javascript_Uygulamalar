@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card-header">
+        <h3 id="title">Todo App Deneme</h3>
+    </div>
+
+    <ul id="task-list">
+        <li class="task">Görev 1</li>
+        <li class="task">Görev 2</li>
+        <li class="task">Görev 3</li>
+    </ul>
+
+    <script>
+        let sonuc;
+        sonuc = document.getElementsByClassName("task")[1];
+
+        taskList = document.getElementsByClassName("task");
+        taskList = document.getElementsByTagName("li");
+
+        for(let i=0;i<taskList.length;i++){
+             console.log(taskList[i]);
+        }
+
+        for(let sonuc of taskList){
+            console.log(sonuc);
+        }
+
+        for(let sonuc in taskList){ 
+            console.log(taskList[sonuc]);
+        }
+
+        for(let sonuc of taskList){
+            sonuc.style.color = "red";
+            sonuc.style.fontSize = "55px";
+        }
+
+        //console.log(sonuc);
+    </script>
+</body>
+</html>
