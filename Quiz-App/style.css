@@ -60,3 +60,20 @@
     color: #721c24;
     background-color: #f8d7da;
 }
+
+.quiz-box .option_list .option.disabled{
+    pointer-events: none; /* kullanıcıya seçim yaptırmamak için ekledim.. Mouse ile tıklattırmamak için ekledim. */
+}
+
+.quiz-box .next_btn{
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+}
+
+.quiz-box .next_btn.show{
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
