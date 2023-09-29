@@ -1,18 +1,21 @@
 .btn_start,
-.quiz-box{
+.quiz-box,
+.score_box{
     position: absolute;   /* Buradaki ilk dört satır ile ekranda Star Quiz butonunu ortaladım */
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
 }
 
-.quiz-box.active{
+.quiz-box.active,
+.score_box.active{
     opacity: 1; 
     pointer-events: auto;
     transform: translate(-50%,-50%) scale(1); /* card 'ın büyüklüğü 1 olur  */
 }
 
-.quiz-box{
+.quiz-box,
+.score_box{
     width: 550px;
     transform: translate(-50%,-50%) scale(0.7); /* card 'ın büyüklüğü 0.7 den ve ekranın tam ortasında başlar */
     transition: all 0.3s ease; /* card içerisinde tüm elemanları kapsayan bir süre olacak. */
@@ -46,7 +49,7 @@
     justify-content: space-between; /* .option tagı içerisindeki elemanların birini sağ birini sola ayırdı. */
 }
 
-.quiz-box .option_list .option:hover{ /* cursor' ım soruların üzerine gelidiğinde sorulara ait text ve çerçevelerin renklerini ayarladım. */
+.quiz-box .option_list .option:hover{ /* cursor' ım soruların üzerine geldiğinde sorulara ait text ve çerçevelerin renklerini ayarladım. */
     color: #112B2C;
     background-color: #FFD33D;
 }
@@ -76,4 +79,74 @@
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
+}
+
+.quiz-box .card-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.score_box{
+    width: 550px;
+    align-items: center; /* 92. ve 93. satırlar ile card içerisindeki elemanları ortaladım */
+    justify-content: center; /* 92. ve 93. satırlar ile card içerisindeki elemanları ortaladım */
+    padding: 30px;
+}
+
+.score_box .icon{
+    font-size: 90px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.score_box .score_text{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* timer */
+
+.quiz-box header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.quiz-box header .timer{
+    display: flex;
+    background-color: #143F68;
+    align-items: center;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 15px;
+}
+
+.quiz-box header .timer .time_text{
+    font-size: 14px;
+}
+
+.quiz-box header .timer .time_second{
+    background-color: #F0A500;
+    border-radius: 3px;
+    padding: 3px;
+    margin-left: 3px;
+    width: 25px;
+    text-align: center;
+}
+
+/* time line */
+
+.quiz-box header .time-line{
+    position: absolute; /* header altındaki elemanlar flex ile yan yanaydı fakat ben bu time line ' ın normal akışın dışarısında card-header ' ın en altında */
+                        /* olmasını istiyorum. Bunu da absolute ile yapıyorum. */
+                        /* .quiz-box header ın bulunduğu kısmada  position: relative; eklemek zorundayım*/
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    /* width: 550px; */ /* 0 - 550 arasında bunu hareket ettiricem script.js tarafında */
+    background-color: #F0A500;
 }
