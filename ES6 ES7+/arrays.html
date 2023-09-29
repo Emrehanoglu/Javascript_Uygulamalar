@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const sayilar = [1,5,7,3,23,2];
+        const urunler = [
+            {urunAdi: "Iphone11", fiyat: 12000},
+            {urunAdi: "Iphone12", fiyat: 15000},
+            {urunAdi: "Iphone13", fiyat: 17000},
+            {urunAdi: "Iphone14", fiyat: 20000}
+        ]
+        const tekSayilarArr = [];
+        /* ES5 */
+        for(let sayi of sayilar){
+            if(sayi % 2 == 1){
+                tekSayilarArr.push(sayi);
+            }
+        }
+        console.log(tekSayilarArr)
+        /* ES6 */
+        const tekSayilarArr2 = sayilar.filter((x) => x % 2 == 1);
+        console.log(tekSayilarArr2);
+
+        const urun = urunler.filter((urun) => urun)
+        const urun2 = urunler.map((urun) => urun.urunAdi)
+        const urun3 = urunler.filter((urun) => urun.fiyat>15000).map((urun) => urun.urunAdi);
+
+        console.log(urun3)
+    </script>
+</body>
+</html>
