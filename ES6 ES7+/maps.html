@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const bilgiler = new Map()
+        
+        bilgiler.set("ad", "Emre")
+        bilgiler.set(2, 26)
+        
+        console.log(bilgiler.get(1))
+        
+        for(let x of bilgiler.keys()){
+            console.log(x)
+        }
+
+        for(let x of bilgiler.values()){
+            console.log(x)
+        }
+
+        for(let [key, value] of bilgiler.entries()){
+            console.log([key, value])
+        }
+
+        console.log(bilgiler.has("ad"))
+
+    </script>
+</body>
+</html>

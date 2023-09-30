@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const sayilar = new Set([1,2,3])
+        console.log(sayilar);
+
+        const sayilar2 = new Set()
+        sayilar2.add(1)
+        sayilar2.add(2)
+        sayilar2.add("4")
+
+        /* sayilar2.delete(2) */
+        
+        console.log(sayilar2.has("4"))
+        /* sayilar2.clear(); */
+        console.log(sayilar2.values());
+
+        for(let x of sayilar2.values()){
+            console.log(x);
+        }
+
+        const dizi = [...sayilar2]
+        console.log(dizi)
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const mesaj = ["benim","adım","emre"]
+        let sonuc = ""
+        /* ES5 */
+        // for(let x of mesaj){
+        //     sonuc += x + " "
+        // }
+
+        /* ES6 */
+        console.log(...mesaj) /* dizi içerisindeki elemanları yanyana yazar. */
+
+        const dizi1 = ["bir","iki"]
+        const dizi2 = ["üç","dört"]
+        const dizi3 = [...dizi1,...dizi2]
+        console.log(dizi3)
+
+        const sayilar1 = [1,2,4];
+        //const sayilar2 = sayilar1; //referans copy, iki diziden birinin değerini değiştirisem diğerinin de değeri değişir
+        const sayilar2 = [...sayilar1] //value copy, iki diziden birinin değerini değiştirirsem diğerinin değeri değişmez.
+
+        sayilar2[1] = 44;
+        console.log(sayilar1,sayilar2)
+
+        const user = {
+            name: "emre",
+            work: "IT"
+        }
+        const address = {
+            city:"istanbul"
+        }
+        const dizi4 = [{...user,...address}]
+        console.log(dizi4)
+
+        /* rest parameters (spread operatörleri fonksiyonlar içerisinde kullanırsam) */
+        function toplam(...args){
+            let sonuc = 0;
+            for(let x of args){
+                sonuc += x;
+            }
+            return sonuc;
+        }
+        console.log(toplam(1,2,4,5))
+        console.log(toplam(1,2,4,6))
+    </script>
+</body>
+</html>

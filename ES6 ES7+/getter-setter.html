@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Kisi{
+            constructor(ad,meslek,yas){
+                this.ad = ad
+                this.meslek = meslek
+                this.yas = yas
+            }
+            yasHesapla = function(){
+                let tarih = new Date().getFullYear()
+                return tarih - this.yas
+            }
+            get ad(){
+                return this._ad;
+            }
+            set ad(value){
+                if(value.length < 5){
+                    console.log('En az 5 karakter girmelisiniz')
+                    return;
+                }
+                this._ad = value;
+            }
+            get yas(){
+                return this._yas
+            }
+            set yas(value){
+                if(value<1900 || value>new Date().getFullYear()){
+                    console.log('Tarih bilgisi hatalı')
+                    return
+                }
+                this._yas = value;
+            }
+        }
+        kisi1 = new Kisi("muarrem akal","mühendis",2022)
+        
+        console.log(kisi1)
+        console.log(kisi1.yasHesapla())
+    </script>
+</body>
+</html>

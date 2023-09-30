@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* ES5 */ /* function constructor */
+        function KisiES5(ad,meslek,yas){
+            this.ad = ad
+            this.meslek = meslek
+            this.yas = yas
+        }
+
+        KisiES5.prototype.yasHesapla = function(){
+                let tarih = new Date().getFullYear()
+                return tarih - this.yas
+            }
+
+        let kisi1 = new KisiES5("emre hanoglu","mühendis",1997)
+        console.log(kisi1.yasHesapla())
+        console.log(kisi1)
+
+        /* ES6 */ /* class */
+        class KisiES6{
+            constructor(ad,meslek,yas){
+                this.ad = ad
+                this.meslek = meslek
+                this.yas = yas
+            }
+            yasHesapla = function(){
+                let tarih = new Date().getFullYear()
+                return tarih - this.yas
+            }
+        }
+        kisi2 = new KisiES6("muarrem akal","mühendis",1998)
+        console.log(kisi2.yasHesapla())
+        console.log(kisi2)
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* array destructuring */
+        let user = ["emre","hanoglu","antalya","kepez", "07000"]
+        let [firstName, lastName, ...address] = user
+        console.log(firstName, lastName, address)
+        /* object destructuring */
+        const urun = {ad:"Iphone",marka:"Apple",fiyat:12000}
+        let {ad, marka, fiyat,stok = 0} = urun;
+        console.log(ad, marka, fiyat,stok)
+    </script>
+</body>
+</html>
