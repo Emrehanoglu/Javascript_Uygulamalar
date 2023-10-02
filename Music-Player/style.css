@@ -1,5 +1,28 @@
+.container {    
+    width: 350px;   /* çerçevenin toplam genişliğini verdim */
+}
+
 #controls i {
     font-size: 30px;
     color: purple;
     margin-right: 20px;
+}
+
+#progress-bar{  
+    width: 100%;    /* ilgili tag çerçeve genişliği kadar olsun */
+}
+
+#music-image{   
+    width: 100%;    /* ilgili tag çerçeve genişliği kadar olsun */
+}
+
+#progress{
+    margin-bottom: 20px; /* progress tag'i ile altındaki tag arasında 20px boşluk bırakıldı. */
+}
+
+#progress .times,
+#controls{
+    display: flex;
+    align-items: center; /* dikeyde ortalansın */
+    justify-content: space-between; /* biri sağa biri sola geçsin */
 }

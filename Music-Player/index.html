@@ -15,10 +15,23 @@
             <p class="title"></p>
             <p class="singer"></p>
         </div>
+        <div id="progress">
+            <input type="range" id="progress-bar">
+            <div class="times">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+        </div>
         <div id="controls">
-            <i id="prev" class="fa-solid fa-backward-step"></i> <!-- önceki müzik için -->
-            <i id="play" class="fa-solid fa-play"></i> <!-- müzik oynatmak için -->
-            <i id="next" class="fa-solid fa-forward-step"></i> <!-- sonraki müzik için -->
+            <div>
+                <i id="prev" class="fa-solid fa-backward-step"></i> <!-- önceki müzik için -->
+                <i id="play" class="fa-solid fa-play"></i> <!-- müzik oynatmak için -->
+                <i id="next" class="fa-solid fa-forward-step"></i> <!-- sonraki müzik için -->
+            </div>
+            <div>
+                <i id="volume" class="fa-solid fa-volume-high"></i> <!-- ses kontrolündeki haporlor ikonu -->
+                <input type="range" value="100" max="100" id="volume-bar">
+            </div>
         </div>
     </div>
 
