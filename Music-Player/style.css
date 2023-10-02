@@ -1,28 +1,27 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* kullanıcının gördüğü toplam sayfa yüksekliğini al ve ortala */
+}
+
 .container {    
-    width: 350px;   /* çerçevenin toplam genişliğini verdim */
-}
-
-#controls i {
-    font-size: 30px;
-    color: purple;
-    margin-right: 20px;
-}
-
-#progress-bar{  
-    width: 100%;    /* ilgili tag çerçeve genişliği kadar olsun */
-}
-
-#music-image{   
-    width: 100%;    /* ilgili tag çerçeve genişliği kadar olsun */
-}
-
-#progress{
-    margin-bottom: 20px; /* progress tag'i ile altındaki tag arasında 20px boşluk bırakıldı. */
+    width: 400px;   /* çerçevenin toplam genişliğini verdim */
 }
 
 #progress .times,
-#controls{
+.card-footer,
+.volume-container{
     display: flex;
     align-items: center; /* dikeyde ortalansın */
     justify-content: space-between; /* biri sağa biri sola geçsin */
+}
+
+.volume-container i{
+    margin-right: 5px;
+}
+
+li.playing{ /* kullanıcı listeden bir müzik oynatırsa playing eklenecek */
+    color: #fff;
+    background-color: #0b5eb7;
 }

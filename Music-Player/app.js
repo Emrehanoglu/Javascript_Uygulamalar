@@ -10,6 +10,7 @@ const currentTime = document.querySelector('#current-time')
 const progressBar = document.querySelector('#progress-bar')
 const volume = document.querySelector('#volume')
 const volumeBar = document.querySelector('#volume-bar')
+const ul = document.querySelector('ul') /* sayfada sonuçta bir tane ul tag' ı var */ 
 
 
 const player = new MusicPlayer(musicList);
@@ -17,6 +18,8 @@ const player = new MusicPlayer(musicList);
 window.addEventListener("load", () => {
     let musicName = player.getMusic()
     displayMusic(musicName)
+    displayMusicList(player.musicList)
+    isPlaying()
 })
 
 function displayMusic(musicName){
@@ -33,12 +36,12 @@ play.addEventListener('click',() => {
 
 function pauseMusic(){
     container.classList.remove('playing')
-    play.classList = 'fa-solid fa-play';
+    play.querySelector('i').classList = 'fa-solid fa-play';
     audio.pause();
 }
 function playMusic(){
     container.classList.add('playing')
-    play.classList = 'fa-solid fa-pause';
+    play.querySelector('i').classList = 'fa-solid fa-pause';
     audio.play();
 }
 /* bir önceki müziğe geçiş ve çalma işlemi */
@@ -50,6 +53,7 @@ function prevMusic(){
     let music = player.getMusic()
     displayMusic(music)
     playMusic()
+    isPlaying()
 }
 /* bir sonraki müziğe geçiş ve çalma işlemi */
 next.addEventListener('click', () => {
@@ -60,6 +64,7 @@ function nextMusic(){
     let music = player.getMusic()
     displayMusic(music)
     playMusic()
+    isPlaying()
 }
 
 audio.addEventListener('loadedmetadata', () => { /* loadedmetadata: müziğe bağlanıldığını kontrol eder, müzik çalıyor mu kontrol eder */
@@ -97,7 +102,7 @@ volume.addEventListener('click', () => {
     }else{
         audio.muted = false
         muteState = 'unmute'
-        volume.classList = 'fa-solid fa-volume-high' /* ikonun açar, ses açıldı */
+        volume.classList = 'fa-solid fa-volume-high' /* ikonu açar, ses açıldı */
         volumeBar.value = 100
     }
 })
@@ -112,6 +117,54 @@ volumeBar.addEventListener('input',(e) => {
     }else{
         audio.muted = false            
         muteState = 'unmute'
-        volume.classList = 'fa-solid fa-volume-high' /* ikonun açar, ses açıldı */
+        volume.classList = 'fa-solid fa-volume-high' /* ikonu açar, ses açıldı */
     }
+})
+
+/* Music List */
+const displayMusicList = (list) =>{
+    for(let i=0 ; i<musicList.length ; i++){
+        let liTag = `
+            <li li-index='${i}' onclick="selectedMusic(this)" class="list-group-item d-flex align-items-center justify-content-between">
+                <span>${list[i].getName()}</span>
+                <span id="music-${i}" class="badge bg-primary rounded-pill"></span>
+                <audio class="music-${i}" src="mp3/${list[i].file}"></audio>
+            </li>
+        `
+
+        ul.insertAdjacentHTML('beforeend',liTag)
+
+        let liAudioDuration = ul.querySelector(`#music-${i}`)
+        let liAudioTag = ul.querySelector(`.music-${i}`)
+        
+        liAudioTag.addEventListener('loadedmetadata',() =>{
+            liAudioDuration.textContent = calculateTime(liAudioTag.duration)
+        })
+
+    }
+}
+
+const selectedMusic = (li) => {
+    player.index = li.getAttribute("li-index")
+    displayMusic(player.getMusic())
+    playMusic()
+    isPlaying()
+}
+
+/* Liste üzerinde seçilen müziğin arka planının boyanması */
+
+const isPlaying = () => {
+    for(let li of ul.querySelectorAll('li')){
+        if(li.classList.contains('playing')){
+            li.classList.remove('playing')
+        }
+
+        if(li.getAttribute('li-index') == player.index){
+            li.classList.add('playing')
+        }
+    }
+}
+
+audio.addEventListener('ended',()=>{
+    nextMusic()
 })
