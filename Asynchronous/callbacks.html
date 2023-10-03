@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        const login = (userName,password,callback) => {
+            setTimeout(() => {
+               callback({userName: userName, mail: 'emre@gmail.com'})
+            },1000)
+        }
+
+        const getPostsByUsername = (username,callback) => {
+            setTimeout(() => {
+                callback(["post1","post2","post3"])
+            })
+        }
+
+        const getPostDetails = (post,callback) => {
+            setTimeout(() => {
+                callback('post details')
+            },3000)
+        }
+
+        login('emre','111',user =>{
+            console.log(user.userName)
+            console.log(user.mail)
+
+            getPostsByUsername(user.userName, posts => {
+                console.log(posts)
+                console.log(posts[1])
+
+                getPostDetails(posts[1], post => {
+                    console.log(post)
+                })
+            })
+        })
+
+
+    </script>
+</body>
+</html>

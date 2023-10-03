@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        /* sync */
+        console.log('1')
+        console.log('2')
+        console.log('3')
+
+        /* async */
+        console.log('1')
+        setTimeout(()=>{
+            console.log(2)
+        },2000)   /* 3 ün console' da yazılması için 2 nin bitmesini beklemesine gerek yok */
+        /* 2 , konsola 2 saniye sonra yazılacak */
+        console.log(3)
+    </script>
+</body>
+</html>
