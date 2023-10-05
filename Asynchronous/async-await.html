@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        const serverStatus = true
+
+        const login = (userName,password) => {
+            return new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    if(serverStatus){
+                        resolve({userName: userName, mail: 'emre@gmail.com'})
+                    }else{
+                        reject('server is offline')
+                    }
+                },1000)
+            })
+        }
+
+        const getPostsByUsername = (username) => {
+            return new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    resolve(["post1","post2","post3"])
+                },2000)
+            })
+        }
+
+        const getPostDetails = (post) => {
+            return new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    resolve('post details')
+                },3000)
+            })
+        }
+
+	/* async-await */
+
+    async function displayUser(){
+            try{
+                const user = await login('emre hanoğlu','123')
+                console.log(user.userName)
+                
+                const posts = await getPostsByUsername(user.userName)
+                console.log(posts)
+                
+                const details = await getPostDetails(posts[1])
+                console.log(details)
+            }
+            catch(err)
+            {
+                console.log(err)
+            }
+        }
+
+        displayUser()
+
+    </script>
+</body>
+</html>
