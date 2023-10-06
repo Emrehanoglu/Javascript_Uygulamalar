@@ -4,6 +4,7 @@ const btnTranslate = document.querySelector('#btnTranslate')
 const fromText = document.querySelector('#from-text')
 const toText = document.querySelector('#to-text')
 const exchange = document.querySelector('.exchange')
+const icons = document.querySelectorAll('.icons')
 
 for(let lang in languages){
     let option = `<option value="${lang}">${languages[lang]}</option>`
@@ -38,3 +39,25 @@ exchange.addEventListener('click',() => {
     fromLang.value = toLang.value
     toLang.value = lang
 })
+
+for(let icon of icons){
+    icon.addEventListener('click',(element) => {
+        if(element.target.classList.contains('fa-copy')){
+            if(element.target.id == 'from'){
+                navigator.clipboard.writeText(fromText.value) /* text area içerisindeki veriyi hafızaya alır, yapıştır yaptığımızda hafızadan okur ve yapıştırır */
+            }else{
+                navigator.clipboard.writeText(toText.value) /* text area içerisindeki veriyi hafızaya alır, yapıştır yaptığımızda hafızadan okur ve yapıştırır */
+            }
+        }else{
+            let utterance
+            if(element.target.id == 'from'){
+                utterance = new SpeechSynthesisUtterance(fromText.value) /* okuyacağı metin */
+                utterance.lang = fromLang.value /* okuyacağı dil */
+            }else{
+                utterance = new SpeechSynthesisUtterance(toText.value) /* okuyacağı metin */
+                utterance.lang = toLang.value /* okuyacağı dil */
+            }
+            speechSynthesis.speak(utterance)
+        }
+    })
+}
