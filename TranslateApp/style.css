@@ -30,10 +30,22 @@ body {
     border: 1px solid #7F8487;
 }
 
-.controls { 
+.controls, .controls li , .icons, .icons i { 
     display: flex; /* elemanlar sol,orta ve sağ şeklinde konumlanacak */
     align-items: center; /* elemanlar sol,orta ve sağ şeklinde konumlanacak */
     justify-content: space-between; /* elemanlar sol,orta ve sağ şeklinde konumlanacak */
+}
+
+.controls .icons i {
+    width: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #7F8487;
+    justify-content: center;
+}
+
+.controls .icons{
+    width: 35%;
 }
 
 ul{
@@ -80,5 +92,9 @@ button:hover{ /* mouse ile butonun üstüne geldiğimde */
     background-color: #fff; /* butonun arka plan rengi */
     color: black; /* butonun içerisindeki font rengi */
     border: 2px solid #555; /* butonun kenarları */
+}
+
+.exchange{
+    cursor: pointer;
 }
 

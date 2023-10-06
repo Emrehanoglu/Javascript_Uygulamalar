@@ -3,6 +3,7 @@ const toLang = document.querySelector('#to-lang')
 const btnTranslate = document.querySelector('#btnTranslate')
 const fromText = document.querySelector('#from-text')
 const toText = document.querySelector('#to-text')
+const exchange = document.querySelector('.exchange')
 
 for(let lang in languages){
     let option = `<option value="${lang}">${languages[lang]}</option>`
@@ -28,3 +29,12 @@ btnTranslate.addEventListener('click',() => {
     })
 })
 
+exchange.addEventListener('click',() => {
+    let text = fromText.value
+    fromText.value = toText.value
+    toText.value = text
+
+    let lang = fromLang.value
+    fromLang.value = toLang.value
+    toLang.value = lang
+})
