@@ -1,0 +1,84 @@
+/* Google Fonts sitesinden istediğim bir font tipini seçip, import kısmından aşağıdaki linki aldım */
+@import url('https://fonts.googleapis.com/css2?family=Young+Serif&display=swap');
+
+*{
+    margin: 0; /* standart bir yapılandırma */
+    padding: 0; /* standart bir yapılandırma */
+    box-sizing: border-box; /* standart bir yapılandırma */
+    font-family: 'Young Serif', serif; /* Google Font sitesinden aldım */
+}
+
+body {
+    background-color: #1897bf;
+    display: flex; /* elemanları yan yana getirir */
+    align-items: center; /* elemanları dikeyde ortaladım */
+    justify-content: center; /* elemanları yatayda ortalar */
+    min-height: 100vh; /* kullanıcının gördüğü alanın yükseliğinin tümünü alır, 
+    yani ekran küçüldüğünde veya büyütüldüğünde mevcut ekranın tümü üzerinden elemanlar ortalanacak*/
+
+}
+
+.container {
+    width: 700px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.box {
+    border-radius: 5px;
+    border: 1px solid #7F8487;
+}
+
+.controls { 
+    display: flex; /* elemanlar sol,orta ve sağ şeklinde konumlanacak */
+    align-items: center; /* elemanlar sol,orta ve sağ şeklinde konumlanacak */
+    justify-content: space-between; /* elemanlar sol,orta ve sağ şeklinde konumlanacak */
+}
+
+ul{
+    list-style: none; /* li tagları içerisinde elemanların solundaki liste imgesi kalkar. */
+    padding: 12px 15px; /* li taglarnın sağdan ve soldan 12px, yukarıdan ve aşağıdan 15px boşluk bırakır */
+}
+
+.text-controls textarea{
+    height: 250px;
+    width: 100%;
+    border: none;
+    outline: none; /* textarea ' ya tıkladığımda etrafında bir çerçeve oluşmasın  */
+    font-size: 18px;
+    border-radius: 5px;
+    background: none;
+    padding: 10px 15px;
+    resize: none; /* textarea' ların boyutları sabit olsun, kullanıcı değiştiremesin */
+}
+
+.text-controls .to-text{
+    border-left: 1px solid #7F8487;
+    border-radius: 0;
+}
+
+.box .text-controls{
+    display: flex; /* elemanlar yan yana gelir */
+    border-top: 1px solid #7F8487;
+}
+
+button {
+    background-color: #555555;
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 10px 20px;
+    margin-top: 5px;
+    font-size: 16px;
+    transition-duration: .4s; /* 0.4 saniyede ekranda belirecek */
+    border: 2px solid #555; /* butonun kenarları */
+    cursor: pointer; /* fare imleci butonun üstüne gelince değişir */
+}
+
+button:hover{ /* mouse ile butonun üstüne geldiğimde */
+    background-color: #fff; /* butonun arka plan rengi */
+    color: black; /* butonun içerisindeki font rengi */
+    border: 2px solid #555; /* butonun kenarları */
+}
+
