@@ -10,6 +10,7 @@ searchProfile.addEventListener('keyup',(element) => {
         .then(res => {
             if(res.profile.length === 0){
                 /* uyarı verilecek */
+                /* Ordu dönüşü */
                 ui.showAlert(text)
             }else{
                 ui.showProfile(res.profile[0])
