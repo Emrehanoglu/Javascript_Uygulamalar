@@ -46,6 +46,16 @@ const ProductController = (function(){
             })
             data.totalPrice = total
             return data.totalPrice
+        },
+        getProductById : function(id){
+            let product = null
+
+            data.products.forEach(function(prd){
+                if(prd.id == id){
+                    product = prd
+                }
+            })
+            return prd
         }
     }
 
@@ -76,11 +86,8 @@ const UIController = (function(){
                         <td>${prd.name}</td>
                         <td>${prd.price} $</td>      
                         <td class="text-right">
-                            <button type="submit" class="btn btn-warning btn-sm">
-                                <i class="far fa-edit"></i>
-                                Save Changes
-                            </button>
-                        </td>                  
+                            <i class="far fa-edit edit-product"></i>
+                        </td>                 
                     </tr>
                 `
             })
@@ -99,10 +106,7 @@ const UIController = (function(){
                     <td>${product.name}</td>
                     <td>${product.price} $</td>      
                     <td class="text-right">
-                        <button type="submit" class="btn btn-warning btn-sm">
-                            <i class="far fa-edit"></i>
-                            Save Changes
-                        </button>
+                        <i class="far fa-edit edit-product"></i>
                     </td>                  
                 </tr>
             `
@@ -131,7 +135,11 @@ const App = (function(ProductCtrl, UICtrl){
 
     //Load Event Listeners
     const loadEventListeners = function(){
+        //add product event
         document.querySelector(UISelectors.addButton).addEventListener('click',productAddSubmit)
+
+        //edit product
+        document.querySelector(UISelectors.productList).addEventListener('click',productEditSubmit)
     }
     const productAddSubmit = function(e){
         const productName = document.querySelector(UISelectors.productName).value
@@ -157,11 +165,23 @@ const App = (function(ProductCtrl, UICtrl){
         e.preventDefault()
     }
 
+    const productEditSubmit = function(e){
+        if(e.target.classList.contains('edit-product')){
+            const id = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent
+        
+            //get selected product
+            const product = ProductCtrl.getProductById(id)
+        }
+
+        e.preventDefault()
+    }
+
     return {
         init : function(){
             console.log('starting app...')
+
             const products = ProductCtrl.getProducts()
-            console.log(products.length)
+            
             if(products.length > 0 ){
                 UICtrl.createProductList(products)
             }else{
