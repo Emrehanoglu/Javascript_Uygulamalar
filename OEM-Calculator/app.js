@@ -14,11 +14,7 @@ const ProductController = (function(){
     }
 
     const data = {
-        products : [
-            {id:0, name:'Monitör',price:100},
-            {id:1, name:'Ram',price:30},
-            {id:2, name:'Klavye',price:10}
-        ],
+        products : [],
         selectedProduct : null,
         totalPrice : 0
     }
@@ -30,6 +26,18 @@ const ProductController = (function(){
         },
         getData : function(){
             return data
+        },
+        addProduct : function(name,price){
+            let id
+            if(data.products.length > 0){
+                id = data.products[data.products.length - 1].id + 1
+            }else{
+                id = 0
+            }
+
+            const newProduct = new Product(id,name,parseFloat(price))
+            data.products.push(newProduct)
+            return newProduct
         }
     }
 
@@ -37,17 +45,107 @@ const ProductController = (function(){
 
 // UI Controller, arayüz üzerindeki html' ler ile çalıştığım kısım
 const UIController = (function(){
+    /* Selector ile html tarafında birden fazla yerde aynı html id si için düzenleme yapmışsam ve bu id bilgisi değişirse gelip
+    Selector içerisinde karşılık geldiği kısmı değiştirmem ile gtml tarafında tüm kısımlar dinamik şekilde değişmiş olacak */
+    const Selectors = {
+        productList : "#item-list",
+        addButton : '.addBtn',
+        productName : '#productName',
+        productPrice : '#productPrice ',
+        productCard : '#productCard'
+    }
+
+    return {
+        createProductList : function(products){
+            let html = ''
+
+            products.forEach(prd => {
+                html += `
+                    <tr>
+                        <td>${prd.id}</td>
+                        <td>${prd.name}</td>
+                        <td>${prd.price} $</td>      
+                        <td class="text-right">
+                            <button type="submit" class="btn btn-warning btn-sm">
+                                <i class="far fa-edit"></i>
+                                Save Changes
+                            </button>
+                        </td>                  
+                    </tr>
+                `
+            })
+
+            document.querySelector(Selectors.productList).innerHTML = html
+        },
+        getSelectors : function(){
+            return Selectors
+        },
+        addProduct : function(product){
+            document.querySelector(Selectors.productCard).style.display = 'block'
+
+            var item = `
+                <tr>
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.price} $</td>      
+                    <td class="text-right">
+                        <button type="submit" class="btn btn-warning btn-sm">
+                            <i class="far fa-edit"></i>
+                            Save Changes
+                        </button>
+                    </td>                  
+                </tr>
+            `
+
+            document.querySelector(Selectors.productList).innerHTML += item
+        },
+        clearInputs : function(){
+            document.querySelector(Selectors.productName).value = ""
+            document.querySelector(Selectors.productPrice).value = ""
+        },
+        hideCard : function(){
+            document.querySelector(Selectors.productCard).style.display = 'none'
+        }
+    }
 
 })()
 
 // App Controller, ana modül işlemleri
 const App = (function(ProductCtrl, UICtrl){
 
+    const UISelectors = UICtrl.getSelectors()
+
+    //Load Event Listeners
+    const loadEventListeners = function(){
+        document.querySelector(UISelectors.addButton).addEventListener('click',productAddSubmit)
+    }
+    const productAddSubmit = function(e){
+        const productName = document.querySelector(UISelectors.productName).value
+        const productPrice = document.querySelector(UISelectors.productPrice).value
+
+        if(productName !== '' && productPrice !== ''){
+            const newProduct = ProductCtrl.addProduct(productName,productPrice)
+
+            UICtrl.addProduct(newProduct)
+
+            UICtrl.clearInputs()
+        }
+
+        e.preventDefault()
+    }
+
     return {
         init : function(){
             console.log('starting app...')
             const products = ProductCtrl.getProducts()
-            console.log(products)
+            console.log(products.length)
+            if(products.length > 0 ){
+                UICtrl.createProductList(products)
+            }else{
+                UICtrl.hideCard()
+            }
+
+            loadEventListeners()
         }
     }
 
