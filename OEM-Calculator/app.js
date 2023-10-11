@@ -74,6 +74,9 @@ const UIController = (function(){
     const Selectors = {
         productList : "#item-list",
         addButton : '.addBtn',
+        updateButton : '.updateBtn',
+        deleteButton : '.deleteBtn',
+        cancelButton : '.cancelBtn',
         productName : '#productName',
         productPrice : '#productPrice ',
         productCard : '#productCard',
@@ -134,6 +137,26 @@ const UIController = (function(){
             const selectedProduct = ProductController.getCurrentProduct()
             document.querySelector(Selectors.productName).value = selectedProduct.name
             document.querySelector(Selectors.productPrice).value = selectedProduct.price
+        },
+        addingState : function(){
+            UIController.clearInputs()
+            document.querySelector(Selectors.addButton).style.display = 'inline'
+            document.querySelector(Selectors.updateButton).style.display = 'none'
+            document.querySelector(Selectors.deleteButton).style.display = 'none'
+            document.querySelector(Selectors.cancelButton).style.display = 'none'
+        },
+        editState : function(tr){
+            const itemlist = tr.parentElement
+
+            for(let i=0;i<itemlist.children.length;i++){
+                itemlist.children[i].classList.remove('bg-warning')
+            }
+
+            tr.classList.add('bg-warning')
+            document.querySelector(Selectors.addButton).style.display = 'none'
+            document.querySelector(Selectors.updateButton).style.display = 'inline'
+            document.querySelector(Selectors.deleteButton).style.display = 'inline'
+            document.querySelector(Selectors.cancelButton).style.display = 'inline'
         }
     }
 
@@ -187,7 +210,9 @@ const App = (function(ProductCtrl, UICtrl){
             ProductCtrl.setCurrentProduct(product)
 
             //add product to UI
-            UICtrl.addProductToForm()
+            UICtrl.addProductToForm(),
+
+            UICtrl.editState(e.target.parentElement.parentElement)
         }
 
         e.preventDefault()
@@ -196,6 +221,8 @@ const App = (function(ProductCtrl, UICtrl){
     return {
         init : function(){
             console.log('starting app...')
+
+            UICtrl.addingState()
 
             const products = ProductCtrl.getProducts()
             
