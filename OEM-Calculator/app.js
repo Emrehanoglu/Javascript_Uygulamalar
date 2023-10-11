@@ -39,6 +39,20 @@ const ProductController = (function(){
             data.products.push(newProduct)
             return newProduct
         },
+        updateProduct : function(name,price){
+            let product = null
+
+            data.products.forEach(function(prd){
+                if(prd.id == data.selectedProduct.id){
+                    prd.name = name
+                    prd.price = parseFloat(price)
+                    product = prd
+                }
+            })
+
+            return product
+
+        },
         GetTotal : function(){
             let total = 0
             data.products.forEach(function(item){
@@ -73,6 +87,7 @@ const UIController = (function(){
     Selector içerisinde karşılık geldiği kısmı değiştirmem ile gtml tarafında tüm kısımlar dinamik şekilde değişmiş olacak */
     const Selectors = {
         productList : "#item-list",
+        productListItems : "#item-list tr",
         addButton : '.addBtn',
         updateButton : '.updateBtn',
         deleteButton : '.deleteBtn',
@@ -122,6 +137,22 @@ const UIController = (function(){
 
             document.querySelector(Selectors.productList).innerHTML += item
         },
+        updateProduct : function(prd){
+
+            let updatedItem =null
+
+            let items = document.querySelectorAll(Selectors.productListItems)
+            items.forEach(function(item){
+                if(item.classList.contains('bg-warning')){
+                    item.children[1].textContent = prd.name
+                    item.children[2].textContent = prd.price + ' $'
+                    updatedItem = item
+                }
+            })
+
+            return updatedItem
+
+        },
         clearInputs : function(){
             document.querySelector(Selectors.productName).value = ""
             document.querySelector(Selectors.productPrice).value = ""
@@ -138,7 +169,10 @@ const UIController = (function(){
             document.querySelector(Selectors.productName).value = selectedProduct.name
             document.querySelector(Selectors.productPrice).value = selectedProduct.price
         },
-        addingState : function(){
+        addingState : function(item){
+            if(item){
+                item.classList.remove('bg-warning')
+            }
             UIController.clearInputs()
             document.querySelector(Selectors.addButton).style.display = 'inline'
             document.querySelector(Selectors.updateButton).style.display = 'none'
@@ -172,8 +206,11 @@ const App = (function(ProductCtrl, UICtrl){
         //add product event
         document.querySelector(UISelectors.addButton).addEventListener('click',productAddSubmit)
 
-        //edit product
-        document.querySelector(UISelectors.productList).addEventListener('click',productEditSubmit)
+        //edit product click
+        document.querySelector(UISelectors.productList).addEventListener('click',productEditClick)
+
+        //edit product submit
+        document.querySelector(UISelectors.updateButton).addEventListener('click',productEditSubmit)
     }
     const productAddSubmit = function(e){
         const productName = document.querySelector(UISelectors.productName).value
@@ -199,7 +236,7 @@ const App = (function(ProductCtrl, UICtrl){
         e.preventDefault()
     }
 
-    const productEditSubmit = function(e){
+    const productEditClick = function(e){
         if(e.target.classList.contains('edit-product')){
             const id = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent
         
@@ -215,6 +252,28 @@ const App = (function(ProductCtrl, UICtrl){
             UICtrl.editState(e.target.parentElement.parentElement)
         }
 
+        e.preventDefault()
+    }
+
+    const productEditSubmit = function(e){
+        const productName = document.querySelector(UISelectors.productName).value
+        const productPrice = document.querySelector(UISelectors.productPrice).value
+
+        if(productName !== '' && productPrice !== ''){
+            //update product
+            const updatedProduct = ProductCtrl.updateProduct(productName,productPrice)
+
+            //update uı 
+            let item = UICtrl.updateProduct(updatedProduct)
+
+            //get total price
+            const total = ProductCtrl.GetTotal()
+
+            //show total price
+            UICtrl.showTotal(total)
+
+            UICtrl.addingState(item)
+        }
         e.preventDefault()
     }
 
