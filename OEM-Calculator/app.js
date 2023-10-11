@@ -55,7 +55,13 @@ const ProductController = (function(){
                     product = prd
                 }
             })
-            return prd
+            return product
+        },
+        setCurrentProduct : function(product){
+            data.selectedProduct = product
+        },
+        getCurrentProduct : function(){
+            return data.selectedProduct
         }
     }
 
@@ -123,6 +129,11 @@ const UIController = (function(){
         showTotal : function(total){
             document.querySelector(Selectors.totalDolar).textContent = total
             document.querySelector(Selectors.totalTl).textContent = total * 25
+        },
+        addProductToForm : function(){
+            const selectedProduct = ProductController.getCurrentProduct()
+            document.querySelector(Selectors.productName).value = selectedProduct.name
+            document.querySelector(Selectors.productPrice).value = selectedProduct.price
         }
     }
 
@@ -171,6 +182,12 @@ const App = (function(ProductCtrl, UICtrl){
         
             //get selected product
             const product = ProductCtrl.getProductById(id)
+
+            //set current product
+            ProductCtrl.setCurrentProduct(product)
+
+            //add product to UI
+            UICtrl.addProductToForm()
         }
 
         e.preventDefault()
