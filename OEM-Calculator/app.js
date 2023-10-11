@@ -1,6 +1,27 @@
 // Storage Controller, kullanıcıdan aldığımız bilgileri tarayıcı belleğine attığım kısım
 const StorageController = (function(){
-    
+    return {
+        storeProduct : function(product){
+            let products
+            if(localStorage.getItem('products') === null){ //ilk defa products objesi oluşturuluyorsa
+                products = []
+                products.push(product)
+            }else{ //mevcutta oluşturulmuş products objesi zaten varsa
+                products = JSON.parse(localStorage.getItem('products')) //LS içerisinde aldığımız veriler ile kolayca işlem yapabilmek için parse ettim
+                products.push(product)
+            }
+            localStorage.setItem('products',JSON.stringify(products)) //JSON string veri tipinde olmalı LS içerisindeki veriler
+        },
+        getProduct : function(){
+            let products
+            if(localStorage.getItem('products') === null){
+                products = []
+            }else{
+                products = JSON.parse(localStorage.getItem('products'))
+            }
+            return products
+        }
+    }
 })()
 
 // Product Controller
@@ -14,7 +35,7 @@ const ProductController = (function(){
     }
 
     const data = {
-        products : [],
+        products : StorageController.getProduct(),
         selectedProduct : null,
         totalPrice : 0
     }
@@ -211,7 +232,7 @@ const UIController = (function(){
 })()
 
 // App Controller, ana modül işlemleri
-const App = (function(ProductCtrl, UICtrl){
+const App = (function(ProductCtrl, UICtrl, StorageCtrl){
 
     const UISelectors = UICtrl.getSelectors()
 
@@ -242,6 +263,9 @@ const App = (function(ProductCtrl, UICtrl){
 
             //add item to list
             UICtrl.addProduct(newProduct)
+
+            //add product to Local Storage
+            StorageCtrl.storeProduct(newProduct)
 
             //get total price
             const total = ProductCtrl.GetTotal()
@@ -345,6 +369,6 @@ const App = (function(ProductCtrl, UICtrl){
         }
     }
 
-})(ProductController,UIController)
+})(ProductController,UIController, StorageController)
 
 App.init()
