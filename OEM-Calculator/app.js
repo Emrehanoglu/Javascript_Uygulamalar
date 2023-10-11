@@ -53,6 +53,13 @@ const ProductController = (function(){
             return product
 
         },
+        deleteProduct : function(product){
+            data.products.forEach(function(prd,index){
+                if(prd.id == product.id){
+                    data.products.splice(index,1)
+                }
+            })
+        },
         GetTotal : function(){
             let total = 0
             data.products.forEach(function(item){
@@ -153,9 +160,23 @@ const UIController = (function(){
             return updatedItem
 
         },
+        deleteProduct : function(){
+            let items = document.querySelectorAll(Selectors.productListItems)
+            items.forEach(function(item){
+                if(item.classList.contains('bg-warning')){
+                    item.remove()
+                }
+            })
+        },
         clearInputs : function(){
             document.querySelector(Selectors.productName).value = ""
             document.querySelector(Selectors.productPrice).value = ""
+        },
+        clearWarning : function(){
+            const items =  document.querySelectorAll(Selectors.productListItems)
+            items.forEach(function(item){
+                item.classList.remove('bg-warning')
+            }) 
         },
         hideCard : function(){
             document.querySelector(Selectors.productCard).style.display = 'none'
@@ -169,10 +190,8 @@ const UIController = (function(){
             document.querySelector(Selectors.productName).value = selectedProduct.name
             document.querySelector(Selectors.productPrice).value = selectedProduct.price
         },
-        addingState : function(item){
-            if(item){
-                item.classList.remove('bg-warning')
-            }
+        addingState : function(){
+            UIController.clearWarning()
             UIController.clearInputs()
             document.querySelector(Selectors.addButton).style.display = 'inline'
             document.querySelector(Selectors.updateButton).style.display = 'none'
@@ -180,12 +199,7 @@ const UIController = (function(){
             document.querySelector(Selectors.cancelButton).style.display = 'none'
         },
         editState : function(tr){
-            const itemlist = tr.parentElement
-
-            for(let i=0;i<itemlist.children.length;i++){
-                itemlist.children[i].classList.remove('bg-warning')
-            }
-
+            UIController.clearWarning()
             tr.classList.add('bg-warning')
             document.querySelector(Selectors.addButton).style.display = 'none'
             document.querySelector(Selectors.updateButton).style.display = 'inline'
@@ -211,6 +225,12 @@ const App = (function(ProductCtrl, UICtrl){
 
         //edit product submit
         document.querySelector(UISelectors.updateButton).addEventListener('click',productEditSubmit)
+
+        //cancel buton click
+        document.querySelector(UISelectors.cancelButton).addEventListener('click',cancelUpdate)
+
+        //delete product submit
+        document.querySelector(UISelectors.deleteButton).addEventListener('click',deleteProductSubmit)
     }
     const productAddSubmit = function(e){
         const productName = document.querySelector(UISelectors.productName).value
@@ -272,11 +292,41 @@ const App = (function(ProductCtrl, UICtrl){
             //show total price
             UICtrl.showTotal(total)
 
-            UICtrl.addingState(item)
+            UICtrl.addingState()
         }
         e.preventDefault()
     }
 
+    const deleteProductSubmit = function(e){
+        //get selected product
+        const selectedProduct = ProductCtrl.getCurrentProduct()
+
+        //delete product from data
+        ProductCtrl.deleteProduct(selectedProduct)
+
+        //delete product from UI
+        UICtrl.deleteProduct()
+
+        //get total price
+        const total = ProductCtrl.GetTotal()
+
+        //show total price
+        UICtrl.showTotal(total)
+
+        UICtrl.addingState()
+        
+        if(total == 0){
+            UICtrl.hideCard()
+        }
+
+        e.preventDefault()
+    }
+
+    const cancelUpdate = function(e){
+        UICtrl.addingState()
+
+        e.preventDefault()
+    }
     return {
         init : function(){
             console.log('starting app...')
