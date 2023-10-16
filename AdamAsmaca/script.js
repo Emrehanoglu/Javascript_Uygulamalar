@@ -9,7 +9,7 @@ const message = document.getElementById('message');
 const playAgainBtn = document.getElementById('play-again');
 
 function getRandomWord(){
-    const words = ["java","javascrıpt","python"];
+    const words = ["gaziantep","usak","artvin"];
 
     return words[Math.floor(Math.random() * words.length)];
 }
