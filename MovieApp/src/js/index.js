@@ -3,9 +3,26 @@
 //https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1
 
 import Search from "./models/Search";
+import {elements} from "./base";
+import * as searchView from './views/searchView'
 
-const search = new Search('abc')
+const state = {}
 
-console.log(search)
+const searchController = async () => {
+    const keyword = elements.searchInput.value
+    if(keyword){
+        state.search = new Search(keyword)
 
-search.getMovie()
+        await state.search.getMovie()
+        searchView.clearInputs()
+        searchView.clearResults()
+        searchView.displayResults(state.search.data)
+    }else{
+        alert('Anahtar Kelime Girmelisiniz')
+    }
+}
+
+elements.searchForm.addEventListener('submit',function(e){
+    searchController()
+    e.preventDefault(); //submit özelliğini kapattım yani sayfa refresh edilmeyecek.
+})
