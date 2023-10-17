@@ -15,7 +15,7 @@ export const displayResults = data =>{
                 <div class="media-body">
                     <h5 class="mt-0 mb-1">
                         <span class="badge badge-primary">${movie.vote_average}</span>
-                        ${movie.title}
+                        <a href="#${movie.id}">${movie.title}</a>
                     </h5>
                     <p>${movie.overview}</p>
                 </div>

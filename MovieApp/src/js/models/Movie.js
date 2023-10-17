@@ -15,7 +15,6 @@ export class Movie{
           
           const response = await fetch(`https://api.themoviedb.org/3/movie/${this.id}?language=en-US`, options)
           this.data = await response.json()
-          console.log(this.data)
     }
 
 }

@@ -20,7 +20,6 @@ const searchController = async () => {
         searchView.clearInputs()
         searchView.clearResults()
         searchView.displayResults(state.search.data)
-        console.log(state.search.data)
     }else{
         alert('Anahtar Kelime Girmelisiniz')
     }
@@ -33,5 +32,13 @@ elements.searchForm.addEventListener('submit',function(e){
 
 //Movie Controller
 
-const movie = new Movie(948420)
-movie.getDetails()
+const movieController = async () => {
+    const id = window.location.hash.replace('#','') //id bilgisi # ile birlikte getiriyordu, replace ile # olan yer gelmiyor 
+    if(id){
+        state.movie = new Movie(id)
+        await state.movie.getDetails()
+        console.log(state.movie)
+    }
+}
+
+window.addEventListener("hashchange", movieController);
