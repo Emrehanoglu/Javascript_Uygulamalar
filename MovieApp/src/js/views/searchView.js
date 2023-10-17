@@ -4,11 +4,9 @@ import {elements} from "../base";
 export const clearInputs = () => {
     elements.searchInput.value = '';
 }
-
 export const clearResults = () => {
     elements.searchResults.value = '';
 }
-
 export const displayResults = data =>{
     data.results.forEach(movie => {
         const html = `
