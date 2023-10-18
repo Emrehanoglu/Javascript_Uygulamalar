@@ -5,7 +5,7 @@ export const clearInputs = () => {
     elements.searchInput.value = '';
 }
 export const clearResults = () => {
-    elements.searchResults.value = '';
+    elements.movieList.value = '';
 }
 export const displayResults = data =>{
     data.results.forEach(movie => {
@@ -21,7 +21,7 @@ export const displayResults = data =>{
                 </div>
             </li>
         `
-
-        elements.searchResults.insertAdjacentHTML('beforeend',html)
+        elements.movieListContainer.classList.add("d-block")
+        elements.movieList.insertAdjacentHTML('beforeend',html)
     })
 }

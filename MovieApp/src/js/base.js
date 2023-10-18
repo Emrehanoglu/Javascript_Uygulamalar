@@ -2,7 +2,10 @@
 export const elements = {
     searchForm:  document.getElementById('form-search'),
     searchInput: document.getElementById('txt-keyword'),
-    searchResults: document.getElementById('results')
+    movieList: document.getElementById('movie-list'),
+    movieListContainer: document.getElementById('movie-list-container'),
+    movieDetails: document.getElementById('movie-details'),
+    movieDetailsContainer: document.getElementById('movie-details-container')
 }
 
 export const image_sizes = {
