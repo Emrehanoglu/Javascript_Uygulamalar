@@ -10,6 +10,17 @@ export const elements = {
     movieDetailsClose: document.getElementById('movie-details-close')
 }
 
+export const renderLoading = parent => {
+  const loader = ` <div class="nb-spinner"></div>`
+  parent.insertAdjacentHTML('beforebegin',loader)
+}
+export const clearLoader = parent => {
+  const loader = parent.previousSibling
+  if(loader){
+    loader.parentNode.removeChild(loader) //loader in bir üst elemanına çıkarak kendisini sildim.
+  }
+}
+
 export const image_sizes = {
     backdrop_sizes: [
         "w300",
