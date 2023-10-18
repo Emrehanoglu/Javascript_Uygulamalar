@@ -4,8 +4,10 @@ export const elements = {
     searchInput: document.getElementById('txt-keyword'),
     movieList: document.getElementById('movie-list'),
     movieListContainer: document.getElementById('movie-list-container'),
+    movieListHeader: document.getElementById('movie-list-header'),
     movieDetails: document.getElementById('movie-details'),
-    movieDetailsContainer: document.getElementById('movie-details-container')
+    movieDetailsContainer: document.getElementById('movie-details-container'),
+    movieDetailsClose: document.getElementById('movie-details-close')
 }
 
 export const image_sizes = {

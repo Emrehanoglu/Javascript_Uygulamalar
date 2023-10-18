@@ -1,5 +1,9 @@
 import {elements} from "../base";
 
+export const closeDetails = () =>{
+    elements.movieDetailsContainer.classList.remove('d-block')
+}
+
 export const backToTop = () =>{
     window.scrollTo({
         top:0,

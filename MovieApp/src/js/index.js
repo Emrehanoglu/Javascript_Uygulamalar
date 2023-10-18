@@ -20,7 +20,7 @@ const searchController = async () => {
         await state.search.getMovie()
         searchView.clearInputs()
         searchView.clearResults()
-        searchView.displayResults(state.search.data)
+        searchView.displayResults(keyword,state.search.data)
     }else{
         alert('Anahtar Kelime Girmelisiniz')
     }
@@ -42,3 +42,4 @@ const movieController = async () => {
     }
 }
 window.addEventListener("hashchange", movieController);
+elements.movieDetailsClose.addEventListener('click',movieView.closeDetails)
